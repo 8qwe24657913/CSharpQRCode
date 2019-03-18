@@ -7,6 +7,8 @@ namespace CSharpQRCode {
 
         [Option('f', "file", Required = false, HelpText = "Assign strings in a file as input.")]
         public string File { get; set; }
+        [Option('e', "encoding", Required = false, HelpText = "Specify encoding for txt files. Default value is UTF8.", Default = "UTF8")]
+        public string Encoding { get; set; }
 
         [Option('d', "db-connect", Required = false, HelpText = "Assign strings in a database as input. check https://www.connectionstrings.com/ and https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring for info about connectString.")]
         public string DbConnect { get; set; }

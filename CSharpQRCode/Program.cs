@@ -8,7 +8,7 @@ namespace CSharpQRCode {
         static void Main(string[] args) {
             Parser.Default.ParseArguments<Options>(args).WithParsed(opts => {
                 try {
-                    string dir = opts.Output ?? Environment.CurrentDirectory;
+                    var dir = opts.Output ?? Environment.CurrentDirectory;
                     IEnumerable<string> source = null;
                     if (opts.EncodeStr != null) {
                         if (opts.Output == null) {
@@ -22,7 +22,7 @@ namespace CSharpQRCode {
                     } else if (opts.File != null) {
                         // encode string(s) in a file and write QRCode(s) to output dir
                         dir = opts.Output ?? Path.Combine(Path.GetDirectoryName(opts.File), Path.GetFileNameWithoutExtension(opts.File));
-                        source = ContentReader.ReadFile(opts.File);
+                        source = ContentReader.ReadFile(opts.File, opts.Encoding);
                     } else if (opts.DbConnect != null && opts.DbCommand != null && opts.DbRow != null) {
                         // encode string(s) in a database and write QRCode(s) to output dir
                         source = new SQLReader(opts.DbConnect, opts.DbCommand, opts.DbRow);
@@ -41,7 +41,7 @@ namespace CSharpQRCode {
                     Console.WriteLine(e.ToString());
                 }
             });
-            Console.Read();
+            //Console.Read();
         }
     }
 }

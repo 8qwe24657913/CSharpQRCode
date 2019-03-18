@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace CSharpQRCode {
@@ -16,12 +15,13 @@ namespace CSharpQRCode {
         public override IEnumerator<string> GetEnumerator() {
             using (var conn = new SqlConnection(connectString)) {
                 conn.Open();
-                var cmd = new SqlCommand(command);
-                var reader = cmd.ExecuteReader();
-                while (reader.Read()) {
-                    yield return reader.GetString(reader.GetOrdinal(row));
+                using (var cmd = new SqlCommand(command)) {
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        yield return reader.GetString(reader.GetOrdinal(row));
+                    }
+                    reader.Close();
                 }
-                reader.Close();
                 conn.Close();
             }
         }

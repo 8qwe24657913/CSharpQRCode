@@ -16,9 +16,9 @@ namespace CSharpQRCode {
             using (var fs = new FileStream(Path, FileMode.Open, FileAccess.Read)) {
                 var workbook = Xlsx ? new XSSFWorkbook(fs) as IWorkbook : new HSSFWorkbook(fs) as IWorkbook;
                 var sheet = workbook.GetSheetAt(0);
-                for (int i = 0; i < sheet.LastRowNum; i++) {
+                for (int i = 0; i <= sheet.LastRowNum; i++) {
                     var row = sheet.GetRow(i);
-                    if (row != null && row.LastCellNum != 0) {
+                    if (row != null) {
                         yield return row.GetCell(0).ToString();
                     }
                 }

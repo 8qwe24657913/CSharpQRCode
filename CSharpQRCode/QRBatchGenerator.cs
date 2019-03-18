@@ -18,7 +18,7 @@ namespace CSharpQRCode {
         private static readonly WriteableBitmapRenderer render = new WriteableBitmapRenderer(new FixedModuleSize(10, QuietZoneModules.Two), Colors.Black, Colors.White);
         private static readonly GraphicsRenderer gRender = new GraphicsRenderer(new FixedModuleSize(10, QuietZoneModules.Two), Brushes.Black, Brushes.White);
         public static void Generate(string dir, IEnumerable<string> source, string logoPath = null) {
-            Image logo = logoPath != null ? Image.FromFile(logoPath) : null;
+            var logo = logoPath != null ? Image.FromFile(logoPath) : null;
             var count = 1;
             foreach (var data in source) {
                 if (data == "") continue;
