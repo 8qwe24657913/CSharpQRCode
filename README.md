@@ -53,6 +53,5 @@ C# 课程实验1 - QRCode 生成
 
 ## 结论
 
-实验过程：被 `OleDbConnection` 绑定微软全家桶坑
-
-实验结果：完成实验
+- C# 的类型系统与 C++ 类似，与 Java 不同，如这次用到的 `IEnumerable<string>` 接口继承于 `IEnumerable` 接口，二者都有 `GetEnumerator()` 方法，但前者返回 `IEnumerator<string>` ，后者返回 `IEnumerator` ，`IEnumerator<string>` 继承于 `IEnumerator` 。如果是 Java 的类型系统，实现 `IEnumerator<string> GetEnumerator()` 方法就可以实现 `IEnumerable` 接口，但 C# 的类型系统在考虑接口实现时认为两个函数的函数签名不同，需要额外实现一个 `IEnumerator GetEnumerator()` 方法，这一点与 C++ 类似。
+- 关于 XML 的读取，网上大多数教程都是使用的 `OldDbConnection` ，但 `OldDbConnection` 内部调用了一些微软的 COM 组件，这带来了与微软“全家桶”绑定的问题，导致编写出的代码在事实上难以跨平台运行或移植到其它平台，我使用了其它的包来规避这个问题。
